@@ -1,0 +1,10 @@
+{
+  "id": 61,
+  "emoji": "🛩️",
+  "title": "OpenSky Network API",
+  "description": "Retrieve state vectors, flights, and tracks for the whole network, a particular sensor, or a specific aircraft. Rate limits apply for certain API calls, and restrictions vary for anonymous and OpenSky users.",
+  "documentation": "https://openskynetwork.github.io/opensky-api/rest.html",
+  "methods": 3,
+  "health": 70,
+  "source": "https://freepublicapis.com/opensky-network-api"
+}

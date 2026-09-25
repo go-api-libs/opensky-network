@@ -1,0 +1,142 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "API",
+    "description": "Retrieve state vectors, flights, and tracks for the whole network, a particular sensor, or a specific aircraft. Rate limits apply for certain API calls, and restrictions vary for anonymous and OpenSky users.",
+    "version": "0.0.1"
+  },
+  "servers": [
+    {
+      "url": "https://opensky-network.org"
+    }
+  ],
+  "paths": {
+    "/api/states/all": {
+      "get": {
+        "operationId": "ListAPIStatesAll",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ListAPIStatesAllOkResponse"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ListAPIStatesAllOk": {
+        "type": "object",
+        "properties": {
+          "time": {
+            "type": "integer",
+            "example": 1790341107
+          },
+          "states": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ListAPIStatesAllOkStatesItem"
+            }
+          }
+        },
+        "required": [
+          "time",
+          "states"
+        ]
+      },
+      "ListAPIStatesAllOkStatesItem": {
+        "type": "array",
+        "prefixItems": [
+          {
+            "type": "string",
+            "example": "39de4f"
+          },
+          {
+            "type": "string",
+            "example": "TVF42VD "
+          },
+          {
+            "type": "string",
+            "example": "France"
+          },
+          {
+            "type": "integer",
+            "example": 1790341107
+          },
+          {
+            "type": "integer",
+            "example": 1790341107
+          },
+          {
+            "type": "number",
+            "format": "double",
+            "example": 2.3604
+          },
+          {
+            "type": "number",
+            "format": "double",
+            "example": 48.7239
+          },
+          {
+            "type": "number",
+            "format": "double",
+            "example": 792.48
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "number",
+            "format": "double",
+            "example": 3.09
+          },
+          {
+            "type": "number",
+            "format": "double",
+            "example": 255.94
+          },
+          {
+            "type": "number",
+            "format": "double",
+            "example": 3.9
+          },
+          {
+            "type": "object",
+            "example": null
+          },
+          {
+            "type": "number",
+            "format": "double",
+            "example": 868.68
+          },
+          {
+            "type": "string",
+            "example": "1000"
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "integer",
+            "example": 0
+          }
+        ]
+      }
+    },
+    "responses": {
+      "ListAPIStatesAllOkResponse": {
+        "description": "OK",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ListAPIStatesAllOk"
+            }
+          }
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "API documentation",
+    "url": "https://openskynetwork.github.io/opensky-api/rest.html"
+  }
+}

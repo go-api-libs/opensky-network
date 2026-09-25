@@ -1,0 +1,1 @@
+Retrieve state vectors, flights, and tracks for the whole network, a particular sensor, or a specific aircraft. Rate limits apply for certain API calls, and restrictions vary for anonymous and OpenSky users.
