@@ -39,27 +39,27 @@ type CurrentStates struct {
 
 // State defines a model
 type State struct {
-	Item00 string
-	Item01 string
-	Item02 string
-	Item03 int
-	Item04 int
-	Item05 float64
-	Item06 float64
-	Item07 float64
-	Item08 bool
-	Item09 float64
-	Item10 float64
-	Item11 float64
-	Item12 struct{}
-	Item13 float64
-	Item14 string
-	Item15 bool
-	Item16 int
+	ICAO24        string
+	Callsign      string
+	OriginCountry string
+	TimePosition  time.Time
+	Item04        int
+	Item05        float64
+	Item06        float64
+	Item07        float64
+	Item08        bool
+	Item09        float64
+	Item10        float64
+	Item11        float64
+	Item12        struct{}
+	Item13        float64
+	Item14        string
+	Item15        bool
+	Item16        int
 }
 
 func (a *State) Items(yield func(int, any) bool) {
-	for i, v := range []any{&a.Item00, &a.Item01, &a.Item02, &a.Item03, &a.Item04, &a.Item05, &a.Item06, &a.Item07, &a.Item08, &a.Item09, &a.Item10, &a.Item11, &a.Item12, &a.Item13, &a.Item14, &a.Item15, &a.Item16} {
+	for i, v := range []any{&a.ICAO24, &a.Callsign, &a.OriginCountry, &a.TimePosition, &a.Item04, &a.Item05, &a.Item06, &a.Item07, &a.Item08, &a.Item09, &a.Item10, &a.Item11, &a.Item12, &a.Item13, &a.Item14, &a.Item15, &a.Item16} {
 		if !yield(i, v) {
 			return
 		}
