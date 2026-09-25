@@ -9,10 +9,18 @@ import (
 	"encoding/json/v2"
 	"fmt"
 	"time"
+
+	"github.com/MarkRosemaker/jsonutil"
 )
 
 var jsonOpts = json.JoinOptions(
 	json.RejectUnknownMembers(true),
+	json.WithMarshalers(json.JoinMarshalers(
+		json.MarshalToFunc(jsonutil.TimeMarshalIntUnix),
+	)),
+	json.WithUnmarshalers(json.JoinUnmarshalers(
+		json.UnmarshalFromFunc(jsonutil.TimeUnmarshalIntUnix),
+	)),
 )
 
 // ListAllStateVectorsParams holds the query parameters for ListAllStateVectors.
