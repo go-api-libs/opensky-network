@@ -14,6 +14,14 @@ var jsonOpts = json.JoinOptions(
 	json.RejectUnknownMembers(true),
 )
 
+// ListAPIStatesAllParams holds the query parameters for ListAPIStatesAll.
+type ListAPIStatesAllParams struct {
+	Lamax string
+	Lamin string
+	Lomax string
+	Lomin string
+}
+
 // ListAPIStatesAllOk defines a model
 type ListAPIStatesAllOk struct {
 	Time   int                            `json:"time"`

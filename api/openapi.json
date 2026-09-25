@@ -12,6 +12,20 @@
   ],
   "paths": {
     "/api/states/all": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/lamax"
+        },
+        {
+          "$ref": "#/components/parameters/lamin"
+        },
+        {
+          "$ref": "#/components/parameters/lomax"
+        },
+        {
+          "$ref": "#/components/parameters/lomin"
+        }
+      ],
       "get": {
         "operationId": "ListAPIStatesAll",
         "responses": {
@@ -131,6 +145,40 @@
               "$ref": "#/components/schemas/ListAPIStatesAllOk"
             }
           }
+        }
+      }
+    },
+    "parameters": {
+      "lamax": {
+        "name": "lamax",
+        "in": "query",
+        "schema": {
+          "type": "string",
+          "example": "47.8229"
+        }
+      },
+      "lamin": {
+        "name": "lamin",
+        "in": "query",
+        "schema": {
+          "type": "string",
+          "example": "45.8389"
+        }
+      },
+      "lomax": {
+        "name": "lomax",
+        "in": "query",
+        "schema": {
+          "type": "string",
+          "example": "10.5226"
+        }
+      },
+      "lomin": {
+        "name": "lomin",
+        "in": "query",
+        "schema": {
+          "type": "string",
+          "example": "5.9962"
         }
       }
     }

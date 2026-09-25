@@ -66,13 +66,35 @@ func NewClient(opts ...ClientOption) (*Client, error) {
 }
 
 // GET /api/states/all
-func (c *Client) ListAPIStatesAll(ctx context.Context) (*ListAPIStatesAllOk, error) {
-	return c.ListAPIStatesAllWithResult[ListAPIStatesAllOk](ctx)
+func (c *Client) ListAPIStatesAll(ctx context.Context, params *ListAPIStatesAllParams) (*ListAPIStatesAllOk, error) {
+	return c.ListAPIStatesAllWithResult[ListAPIStatesAllOk](ctx, params)
 }
 
 // GET /api/states/all
-func (c *Client) ListAPIStatesAllWithResult[R any](ctx context.Context) (*R, error) {
+func (c *Client) ListAPIStatesAllWithResult[R any](ctx context.Context, params *ListAPIStatesAllParams) (*R, error) {
 	u := c.baseURL.JoinPath("api", "states", "all")
+	if params != nil {
+		q := make(url.Values, 4)
+
+		if params.Lamax != "" {
+			q["lamax"] = []string{params.Lamax}
+		}
+
+		if params.Lamin != "" {
+			q["lamin"] = []string{params.Lamin}
+		}
+
+		if params.Lomax != "" {
+			q["lomax"] = []string{params.Lomax}
+		}
+
+		if params.Lomin != "" {
+			q["lomin"] = []string{params.Lomin}
+		}
+
+		u.RawQuery = q.Encode()
+	}
+
 	req := (&http.Request{
 		Header: http.Header{
 			"User-Agent": []string{c.userAgent},
