@@ -27,10 +27,11 @@
         }
       ],
       "get": {
-        "operationId": "ListAPIStatesAll",
+        "summary": "All State Vectors",
+        "operationId": "ListAllStateVectors",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/ListAPIStatesAllOkResponse"
+            "$ref": "#/components/responses/CurrentStates"
           }
         }
       }
@@ -38,18 +39,16 @@
   },
   "components": {
     "schemas": {
-      "ListAPIStatesAllOk": {
+      "CurrentStates": {
         "type": "object",
         "properties": {
           "time": {
             "type": "integer",
+            "format": "date-time",
             "example": 1790341107
           },
           "states": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ListAPIStatesAllOkStatesItem"
-            }
+            "$ref": "#/components/schemas/States"
           }
         },
         "required": [
@@ -57,7 +56,7 @@
           "states"
         ]
       },
-      "ListAPIStatesAllOkStatesItem": {
+      "State": {
         "type": "array",
         "prefixItems": [
           {
@@ -134,15 +133,21 @@
             "example": 0
           }
         ]
+      },
+      "States": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/State"
+        }
       }
     },
     "responses": {
-      "ListAPIStatesAllOkResponse": {
+      "CurrentStates": {
         "description": "OK",
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/ListAPIStatesAllOk"
+              "$ref": "#/components/schemas/CurrentStates"
             }
           }
         }

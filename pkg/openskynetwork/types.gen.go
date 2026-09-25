@@ -8,28 +8,29 @@ import (
 	"encoding/json/jsontext"
 	"encoding/json/v2"
 	"fmt"
+	"time"
 )
 
 var jsonOpts = json.JoinOptions(
 	json.RejectUnknownMembers(true),
 )
 
-// ListAPIStatesAllParams holds the query parameters for ListAPIStatesAll.
-type ListAPIStatesAllParams struct {
+// ListAllStateVectorsParams holds the query parameters for ListAllStateVectors.
+type ListAllStateVectorsParams struct {
 	Lamax string
 	Lamin string
 	Lomax string
 	Lomin string
 }
 
-// ListAPIStatesAllOk defines a model
-type ListAPIStatesAllOk struct {
-	Time   int                            `json:"time"`
-	States []ListAPIStatesAllOkStatesItem `json:"states"`
+// CurrentStates defines a model
+type CurrentStates struct {
+	Time   time.Time `json:"time"`
+	States States    `json:"states"`
 }
 
-// ListAPIStatesAllOkStatesItem defines a model
-type ListAPIStatesAllOkStatesItem struct {
+// State defines a model
+type State struct {
 	Item00 string
 	Item01 string
 	Item02 string
@@ -49,7 +50,7 @@ type ListAPIStatesAllOkStatesItem struct {
 	Item16 int
 }
 
-func (a *ListAPIStatesAllOkStatesItem) Items(yield func(int, any) bool) {
+func (a *State) Items(yield func(int, any) bool) {
 	for i, v := range []any{&a.Item00, &a.Item01, &a.Item02, &a.Item03, &a.Item04, &a.Item05, &a.Item06, &a.Item07, &a.Item08, &a.Item09, &a.Item10, &a.Item11, &a.Item12, &a.Item13, &a.Item14, &a.Item15, &a.Item16} {
 		if !yield(i, v) {
 			return
@@ -58,7 +59,7 @@ func (a *ListAPIStatesAllOkStatesItem) Items(yield func(int, any) bool) {
 }
 
 // UnmarshalJSONFrom implements [json.UnmarshalerFrom].
-func (a *ListAPIStatesAllOkStatesItem) UnmarshalJSONFrom(dec *jsontext.Decoder) error {
+func (a *State) UnmarshalJSONFrom(dec *jsontext.Decoder) error {
 	if k := dec.PeekKind(); k != jsontext.KindBeginArray {
 		return &json.SemanticError{JSONKind: k}
 	}
@@ -86,7 +87,7 @@ func (a *ListAPIStatesAllOkStatesItem) UnmarshalJSONFrom(dec *jsontext.Decoder) 
 }
 
 // MarshalJSONTo implements [json.MarshalerTo].
-func (a ListAPIStatesAllOkStatesItem) MarshalJSONTo(enc *jsontext.Encoder) error {
+func (a State) MarshalJSONTo(enc *jsontext.Encoder) error {
 	if err := enc.WriteToken(jsontext.BeginArray); err != nil {
 		return err
 	}
@@ -103,3 +104,6 @@ func (a ListAPIStatesAllOkStatesItem) MarshalJSONTo(enc *jsontext.Encoder) error
 
 	return nil
 }
+
+// States defines a model
+type States []State
