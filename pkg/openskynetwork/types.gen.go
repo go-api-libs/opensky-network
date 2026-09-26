@@ -35,8 +35,8 @@ type ListAllStateVectorsParams struct {
 	Lomin string
 }
 
-// ListAPIFlightsAllParams holds the query parameters for ListAPIFlightsAll.
-type ListAPIFlightsAllParams struct {
+// ListAllFlightsParams holds the query parameters for ListAllFlights.
+type ListAllFlightsParams struct {
 	Begin int
 	End   int
 }
@@ -49,14 +49,8 @@ type CurrentStates struct {
 	States States `json:"states"`
 }
 
-// ListAPIFlightsAllForbidden defines a model
-type ListAPIFlightsAllForbidden string
-
-// ListAPIFlightsAllOk defines a model
-type ListAPIFlightsAllOk []ListAPIFlightsAllOkItem
-
-// ListAPIFlightsAllOkItem defines a model
-type ListAPIFlightsAllOkItem struct {
+// Flight defines a model
+type Flight struct {
 	Icao24                           string `json:"icao24,omitzero"`
 	FirstSeen                        int    `json:"firstSeen"`
 	EstDepartureAirport              string `json:"estDepartureAirport,omitzero"`
@@ -70,6 +64,12 @@ type ListAPIFlightsAllOkItem struct {
 	DepartureAirportCandidatesCount  int    `json:"departureAirportCandidatesCount"`
 	ArrivalAirportCandidatesCount    int    `json:"arrivalAirportCandidatesCount"`
 }
+
+// Flights defines a model
+type Flights []Flight
+
+// Forbidden defines a model
+type Forbidden string
 
 // Origin of a state’s position.
 type PositionSource int

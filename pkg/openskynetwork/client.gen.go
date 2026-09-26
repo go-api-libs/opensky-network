@@ -140,8 +140,8 @@ func (c *Client) ListAllStateVectorsWithResult[R any](ctx context.Context, param
 }
 
 // GET /flights/all
-func (c *Client) ListAPIFlightsAll(ctx context.Context, params *ListAPIFlightsAllParams) (ListAPIFlightsAllOk, error) {
-	out, err := c.ListAPIFlightsAllWithResult[ListAPIFlightsAllOk](ctx, params)
+func (c *Client) ListAllFlights(ctx context.Context, params *ListAllFlightsParams) (Flights, error) {
+	out, err := c.ListAllFlightsWithResult[Flights](ctx, params)
 	if err != nil {
 		return nil, err
 	}
@@ -150,7 +150,7 @@ func (c *Client) ListAPIFlightsAll(ctx context.Context, params *ListAPIFlightsAl
 }
 
 // GET /flights/all
-func (c *Client) ListAPIFlightsAllWithResult[R any](ctx context.Context, params *ListAPIFlightsAllParams) (*R, error) {
+func (c *Client) ListAllFlightsWithResult[R any](ctx context.Context, params *ListAllFlightsParams) (*R, error) {
 	u := c.baseURL.JoinPath("flights", "all")
 	if params != nil {
 		q := make(url.Values, 2)

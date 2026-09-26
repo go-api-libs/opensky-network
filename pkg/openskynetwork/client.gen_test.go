@@ -131,7 +131,7 @@ func TestClient_Error(t *testing.T) {
 		})
 	})
 
-	t.Run("ListAPIFlightsAll", func(t *testing.T) {
+	t.Run("ListAllFlights", func(t *testing.T) {
 		t.Run("transport error", func(t *testing.T) {
 			c, err := NewClient(WithHTTPClient(&http.Client{Transport: roundTripFunc(
 				func(*http.Request) (*http.Response, error) { return nil, io.EOF },
@@ -140,7 +140,7 @@ func TestClient_Error(t *testing.T) {
 				t.Fatal(err)
 			}
 
-			if _, err := c.ListAPIFlightsAll(t.Context(), nil); err == nil {
+			if _, err := c.ListAllFlights(t.Context(), nil); err == nil {
 				t.Fatal("expected error")
 			} else if !errors.Is(err, io.EOF) {
 				t.Fatalf("want: %v, got: %v", io.EOF, err)
@@ -160,7 +160,7 @@ func TestClient_Error(t *testing.T) {
 				t.Fatal(err)
 			}
 
-			if _, err := c.ListAPIFlightsAll(t.Context(), nil); err == nil {
+			if _, err := c.ListAllFlights(t.Context(), nil); err == nil {
 				t.Fatal("expected error")
 			} else if apiErr, ok := errors.AsType[*api.Error](err); !ok {
 				t.Fatalf("got: %T, want: *api.Error", err)
@@ -188,7 +188,7 @@ func TestClient_Error(t *testing.T) {
 				t.Fatal(err)
 			}
 
-			if _, err := c.ListAPIFlightsAll(t.Context(), nil); err == nil {
+			if _, err := c.ListAllFlights(t.Context(), nil); err == nil {
 				t.Fatal("expected error")
 			} else if !errors.Is(err, api.ErrUnknownContentType) {
 				t.Fatalf("want: %v, got: %v", api.ErrUnknownContentType, err)
@@ -213,7 +213,7 @@ func TestClient_Error(t *testing.T) {
 				t.Fatal(err)
 			}
 
-			if _, err := c.ListAPIFlightsAll(t.Context(), nil); err == nil {
+			if _, err := c.ListAllFlights(t.Context(), nil); err == nil {
 				t.Fatal("expected error")
 			} else if decErr, ok := errors.AsType[*api.DecodingError](err); !ok {
 				t.Fatalf("got: %T, want: *api.DecodingError", err)
@@ -316,19 +316,19 @@ func TestClient_Interactions(t *testing.T) {
 		t.Fatalf("ListAllStateVectors: %v", err)
 	}
 
-	if _, err := c.ListAPIFlightsAll(ctx, &ListAPIFlightsAllParams{
+	if _, err := c.ListAllFlights(ctx, &ListAllFlightsParams{
 		Begin: 1790341107,
 		End:   1790351107,
 	}); err == nil {
-		t.Fatal("ListAPIFlightsAll: expected error")
+		t.Fatal("ListAllFlights: expected error")
 	} else if _, ok := errors.AsType[*api.ErrorBody](err); !ok {
-		t.Fatalf("ListAPIFlightsAll: got: %T, want: *api.ErrorBody", err)
+		t.Fatalf("ListAllFlights: got: %T, want: *api.ErrorBody", err)
 	}
 
-	if _, err := c.ListAPIFlightsAll(ctx, &ListAPIFlightsAllParams{
+	if _, err := c.ListAllFlights(ctx, &ListAllFlightsParams{
 		Begin: 1790433561,
 		End:   1790440761,
 	}); err != nil {
-		t.Fatalf("ListAPIFlightsAll: %v", err)
+		t.Fatalf("ListAllFlights: %v", err)
 	}
 }

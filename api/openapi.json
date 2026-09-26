@@ -46,13 +46,13 @@
         }
       ],
       "get": {
-        "operationId": "ListAPIFlightsAll",
+        "operationId": "ListAllFlights",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/ListAPIFlightsAllOkResponse"
+            "$ref": "#/components/responses/Flights"
           },
           "403": {
-            "$ref": "#/components/responses/ListAPIFlightsAllForbiddenResponse"
+            "$ref": "#/components/responses/Forbidden"
           }
         }
       }
@@ -79,16 +79,7 @@
           "states"
         ]
       },
-      "ListAPIFlightsAllForbidden": {
-        "type": "string"
-      },
-      "ListAPIFlightsAllOk": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/ListAPIFlightsAllOkItem"
-        }
-      },
-      "ListAPIFlightsAllOkItem": {
+      "Flight": {
         "type": "object",
         "properties": {
           "icao24": {
@@ -154,6 +145,15 @@
           "departureAirportCandidatesCount",
           "arrivalAirportCandidatesCount"
         ]
+      },
+      "Flights": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Flight"
+        }
+      },
+      "Forbidden": {
+        "type": "string"
       },
       "PositionSource": {
         "description": "Origin of a state’s position.",
@@ -306,22 +306,22 @@
           }
         }
       },
-      "ListAPIFlightsAllForbiddenResponse": {
-        "description": "Forbidden",
-        "content": {
-          "text/plain": {
-            "schema": {
-              "$ref": "#/components/schemas/ListAPIFlightsAllForbidden"
-            }
-          }
-        }
-      },
-      "ListAPIFlightsAllOkResponse": {
+      "Flights": {
         "description": "OK",
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/ListAPIFlightsAllOk"
+              "$ref": "#/components/schemas/Flights"
+            }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "Forbidden",
+        "content": {
+          "text/plain": {
+            "schema": {
+              "$ref": "#/components/schemas/Forbidden"
             }
           }
         }
