@@ -39,23 +39,27 @@ type CurrentStates struct {
 
 // State defines a model
 type State struct {
-	ICAO24        string
-	Callsign      string
+	// Unique ICAO 24-bit address of the transponder in hex string representation.
+	ICAO24 string
+	// Callsign of the vehicle (8 chars). Can be null if no callsign has been received.
+	Callsign string
+	// Country name inferred from the ICAO 24-bit address.
 	OriginCountry string
-	TimePosition  time.Time
-	Item04        int
-	Item05        float64
-	Item06        float64
-	Item07        float64
-	Item08        bool
-	Item09        float64
-	Item10        float64
-	Item11        float64
-	Item12        struct{}
-	Item13        float64
-	Item14        string
-	Item15        bool
-	Item16        int
+	// Unix timestamp (seconds) for the last position update. Can be null if no position report was received by OpenSky within the past 15s.
+	TimePosition time.Time
+	Item04       int
+	Item05       float64
+	Item06       float64
+	Item07       float64
+	Item08       bool
+	Item09       float64
+	Item10       float64
+	Item11       float64
+	Item12       struct{}
+	Item13       float64
+	Item14       string
+	Item15       bool
+	Item16       int
 }
 
 func (a *State) Items(yield func(int, any) bool) {
