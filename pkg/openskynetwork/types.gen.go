@@ -37,8 +37,10 @@ type ListAllStateVectorsParams struct {
 
 // CurrentStates defines a model
 type CurrentStates struct {
-	Time   time.Time `json:"time"`
-	States States    `json:"states"`
+	// The time which the state vectors in this response are associated with. All vectors represent the state of a vehicle with the interval [𝑡⁢𝑖⁢𝑚⁢𝑒 −1,𝑡⁢𝑖⁢𝑚⁢𝑒]
+	Time time.Time `json:"time"`
+	// The state vectors.
+	States States `json:"states"`
 }
 
 // Origin of a state’s position.

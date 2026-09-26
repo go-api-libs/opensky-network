@@ -43,12 +43,14 @@
         "type": "object",
         "properties": {
           "time": {
+            "description": "The time which the state vectors in this response are associated with. All vectors represent the state of a vehicle with the interval [𝑡⁢𝑖⁢𝑚⁢𝑒 −1,𝑡⁢𝑖⁢𝑚⁢𝑒]",
             "type": "integer",
             "format": "date-time",
             "example": 1790341107
           },
           "states": {
-            "$ref": "#/components/schemas/States"
+            "$ref": "#/components/schemas/States",
+            "description": "The state vectors."
           }
         },
         "required": [
