@@ -237,12 +237,12 @@ func (c *Client) ListFlightsByAircraftWithResult[R any](ctx context.Context, par
 	if params != nil {
 		q := make(url.Values, 3)
 
-		if params.Begin != 0 {
-			q["begin"] = []string{strconv.Itoa(params.Begin)}
+		if !params.Begin.IsZero() {
+			q["begin"] = []string{strconv.Itoa(int(params.Begin.Unix()))}
 		}
 
-		if params.End != 0 {
-			q["end"] = []string{strconv.Itoa(params.End)}
+		if !params.End.IsZero() {
+			q["end"] = []string{strconv.Itoa(int(params.End.Unix()))}
 		}
 
 		if params.Icao24 != "" {

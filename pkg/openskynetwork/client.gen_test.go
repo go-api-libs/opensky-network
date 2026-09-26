@@ -426,8 +426,8 @@ func TestClient_Interactions(t *testing.T) {
 	}
 
 	if _, err := c.ListFlightsByAircraft(ctx, &ListFlightsByAircraftParams{
-		Begin:  1790433561,
-		End:    1790440761,
+		Begin:  time.Unix(1790433561, 0),
+		End:    time.Unix(1790440761, 0),
 		Icao24: "008df8",
 	}); err != nil {
 		t.Fatalf("ListFlightsByAircraft: %v", err)

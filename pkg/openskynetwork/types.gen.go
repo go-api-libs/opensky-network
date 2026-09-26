@@ -45,8 +45,10 @@ type ListAllFlightsParams struct {
 
 // ListFlightsByAircraftParams holds the query parameters for ListFlightsByAircraft.
 type ListFlightsByAircraftParams struct {
-	Begin  int
-	End    int
+	// Start of time interval to retrieve flights for as Unix time (seconds since epoch)
+	Begin time.Time
+	// End of time interval to retrieve flights for as Unix time (seconds since epoch)
+	End    time.Time
 	Icao24 string
 }
 

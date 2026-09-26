@@ -60,10 +60,10 @@
     "/flights/aircraft": {
       "parameters": [
         {
-          "$ref": "#/components/parameters/begin2"
+          "$ref": "#/components/parameters/begin"
         },
         {
-          "$ref": "#/components/parameters/end2"
+          "$ref": "#/components/parameters/end"
         },
         {
           "$ref": "#/components/parameters/icao24"
@@ -359,13 +359,6 @@
           "format": "date-time"
         }
       },
-      "begin2": {
-        "name": "begin",
-        "in": "query",
-        "schema": {
-          "type": "integer"
-        }
-      },
       "end": {
         "name": "end",
         "in": "query",
@@ -373,13 +366,6 @@
         "schema": {
           "type": "integer",
           "format": "date-time"
-        }
-      },
-      "end2": {
-        "name": "end",
-        "in": "query",
-        "schema": {
-          "type": "integer"
         }
       },
       "icao24": {
