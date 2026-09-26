@@ -85,61 +85,75 @@
             "x-go-name": "TimePosition"
           },
           {
+            "description": "Unix timestamp (seconds) for the last update in general. This field is updated for any new, valid message received from the transponder.",
             "type": "integer",
-            "example": 1790341107
+            "example": 1790341107,
+            "x-go-name": "LastContact"
           },
           {
             "type": "number",
             "format": "double",
-            "example": 2.3604
+            "example": 2.3604,
+            "x-go-name": "Longitude"
           },
           {
             "type": "number",
             "format": "double",
-            "example": 48.7239
+            "example": 48.7239,
+            "x-go-name": "Latitude"
           },
           {
             "type": "number",
             "format": "double",
-            "example": 792.48
+            "example": 792.48,
+            "x-go-name": "BaroAltitude"
           },
           {
-            "type": "boolean"
-          },
-          {
-            "type": "number",
-            "format": "double",
-            "example": 3.09
+            "type": "boolean",
+            "x-go-name": "OnGround"
           },
           {
             "type": "number",
             "format": "double",
-            "example": 255.94
+            "example": 3.09,
+            "x-go-name": "Velocity"
           },
           {
             "type": "number",
             "format": "double",
-            "example": 3.9
+            "example": 255.94,
+            "x-go-name": "TrueTrack"
+          },
+          {
+            "type": "number",
+            "format": "double",
+            "example": 3.9,
+            "x-go-name": "VerticalRate"
           },
           {
             "type": "object",
-            "example": null
+            "example": null,
+            "x-go-name": "Sensors"
           },
           {
             "type": "number",
             "format": "double",
-            "example": 868.68
+            "example": 868.68,
+            "x-go-name": "GeoAltitude"
           },
           {
             "type": "string",
-            "example": "1000"
+            "example": "1000",
+            "x-go-name": "Squawk"
           },
           {
-            "type": "boolean"
+            "type": "boolean",
+            "x-go-name": "SPI"
           },
           {
             "type": "integer",
-            "example": 0
+            "example": 0,
+            "x-go-name": "PositionSource"
           }
         ]
       },

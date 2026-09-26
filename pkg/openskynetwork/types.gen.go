@@ -47,23 +47,24 @@ type State struct {
 	OriginCountry string
 	// Unix timestamp (seconds) for the last position update. Can be null if no position report was received by OpenSky within the past 15s.
 	TimePosition time.Time
-	Item04       int
-	Item05       float64
-	Item06       float64
-	Item07       float64
-	Item08       bool
-	Item09       float64
-	Item10       float64
-	Item11       float64
-	Item12       struct{}
-	Item13       float64
-	Item14       string
-	Item15       bool
-	Item16       int
+	// Unix timestamp (seconds) for the last update in general. This field is updated for any new, valid message received from the transponder.
+	LastContact    int
+	Longitude      float64
+	Latitude       float64
+	BaroAltitude   float64
+	OnGround       bool
+	Velocity       float64
+	TrueTrack      float64
+	VerticalRate   float64
+	Sensors        struct{}
+	GeoAltitude    float64
+	Squawk         string
+	SPI            bool
+	PositionSource int
 }
 
 func (a *State) Items(yield func(int, any) bool) {
-	for i, v := range []any{&a.ICAO24, &a.Callsign, &a.OriginCountry, &a.TimePosition, &a.Item04, &a.Item05, &a.Item06, &a.Item07, &a.Item08, &a.Item09, &a.Item10, &a.Item11, &a.Item12, &a.Item13, &a.Item14, &a.Item15, &a.Item16} {
+	for i, v := range []any{&a.ICAO24, &a.Callsign, &a.OriginCountry, &a.TimePosition, &a.LastContact, &a.Longitude, &a.Latitude, &a.BaroAltitude, &a.OnGround, &a.Velocity, &a.TrueTrack, &a.VerticalRate, &a.Sensors, &a.GeoAltitude, &a.Squawk, &a.SPI, &a.PositionSource} {
 		if !yield(i, v) {
 			return
 		}
