@@ -49,7 +49,7 @@ type ListFlightsByAircraftParams struct {
 	Begin time.Time
 	// End of time interval to retrieve flights for as Unix time (seconds since epoch)
 	End time.Time
-	// Unique ICAO 24-bit address of the transponder in hex string representation.
+	// Unique ICAO 24-bit address of the transponder in hex string representation. All letters need to be lower case
 	Icao24 ICAO24
 }
 

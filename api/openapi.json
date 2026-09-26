@@ -373,7 +373,7 @@
       "icao24": {
         "name": "icao24",
         "in": "query",
-        "description": "Unique ICAO 24-bit address of the transponder in hex string representation.",
+        "description": "Unique ICAO 24-bit address of the transponder in hex string representation. All letters need to be lower case",
         "schema": {
           "$ref": "#/components/schemas/ICAO24"
         }
