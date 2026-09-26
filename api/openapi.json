@@ -331,6 +331,7 @@
       "begin": {
         "name": "begin",
         "in": "query",
+        "description": "Start of time interval to retrieve flights for as Unix time (seconds since epoch)",
         "schema": {
           "type": "integer",
           "format": "date-time"
@@ -339,6 +340,7 @@
       "end": {
         "name": "end",
         "in": "query",
+        "description": "End of time interval to retrieve flights for as Unix time (seconds since epoch)",
         "schema": {
           "type": "integer",
           "format": "date-time"

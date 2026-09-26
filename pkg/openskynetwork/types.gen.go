@@ -37,8 +37,10 @@ type ListAllStateVectorsParams struct {
 
 // ListAllFlightsParams holds the query parameters for ListAllFlights.
 type ListAllFlightsParams struct {
+	// Start of time interval to retrieve flights for as Unix time (seconds since epoch)
 	Begin time.Time
-	End   time.Time
+	// End of time interval to retrieve flights for as Unix time (seconds since epoch)
+	End time.Time
 }
 
 // CurrentStates defines a model
