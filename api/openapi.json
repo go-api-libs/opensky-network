@@ -87,28 +87,33 @@
           {
             "description": "Unix timestamp (seconds) for the last update in general. This field is updated for any new, valid message received from the transponder.",
             "type": "integer",
+            "format": "date-time",
             "example": 1790341107,
             "x-go-name": "LastContact"
           },
           {
+            "description": "WGS-84 longitude in decimal degrees. Can be null.",
             "type": "number",
             "format": "double",
             "example": 2.3604,
             "x-go-name": "Longitude"
           },
           {
+            "description": "WGS-84 latitude in decimal degrees. Can be null.",
             "type": "number",
             "format": "double",
             "example": 48.7239,
             "x-go-name": "Latitude"
           },
           {
+            "description": "Barometric altitude in meters. Can be null.",
             "type": "number",
             "format": "double",
             "example": 792.48,
             "x-go-name": "BaroAltitude"
           },
           {
+            "description": "Boolean value which indicates if the position was retrieved from a surface position report.",
             "type": "boolean",
             "x-go-name": "OnGround"
           },

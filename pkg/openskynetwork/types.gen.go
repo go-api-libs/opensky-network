@@ -48,10 +48,14 @@ type State struct {
 	// Unix timestamp (seconds) for the last position update. Can be null if no position report was received by OpenSky within the past 15s.
 	TimePosition time.Time
 	// Unix timestamp (seconds) for the last update in general. This field is updated for any new, valid message received from the transponder.
-	LastContact    int
-	Longitude      float64
-	Latitude       float64
-	BaroAltitude   float64
+	LastContact time.Time
+	// WGS-84 longitude in decimal degrees. Can be null.
+	Longitude float64
+	// WGS-84 latitude in decimal degrees. Can be null.
+	Latitude float64
+	// Barometric altitude in meters. Can be null.
+	BaroAltitude float64
+	// Boolean value which indicates if the position was retrieved from a surface position report.
 	OnGround       bool
 	Velocity       float64
 	TrueTrack      float64
