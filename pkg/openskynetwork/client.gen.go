@@ -155,12 +155,12 @@ func (c *Client) ListAllFlightsWithResult[R any](ctx context.Context, params *Li
 	if params != nil {
 		q := make(url.Values, 2)
 
-		if params.Begin != 0 {
-			q["begin"] = []string{strconv.Itoa(params.Begin)}
+		if !params.Begin.IsZero() {
+			q["begin"] = []string{strconv.Itoa(int(params.Begin.Unix()))}
 		}
 
-		if params.End != 0 {
-			q["end"] = []string{strconv.Itoa(params.End)}
+		if !params.End.IsZero() {
+			q["end"] = []string{strconv.Itoa(int(params.End.Unix()))}
 		}
 
 		u.RawQuery = q.Encode()

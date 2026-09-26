@@ -332,14 +332,16 @@
         "name": "begin",
         "in": "query",
         "schema": {
-          "type": "integer"
+          "type": "integer",
+          "format": "date-time"
         }
       },
       "end": {
         "name": "end",
         "in": "query",
         "schema": {
-          "type": "integer"
+          "type": "integer",
+          "format": "date-time"
         }
       },
       "lamax": {

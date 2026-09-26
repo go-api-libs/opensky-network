@@ -17,6 +17,7 @@ import (
 	"slices"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/MarkRosemaker/openapi-enrich/cassette"
 	"github.com/go-api-libs/api"
@@ -317,8 +318,8 @@ func TestClient_Interactions(t *testing.T) {
 	}
 
 	if _, err := c.ListAllFlights(ctx, &ListAllFlightsParams{
-		Begin: 1790341107,
-		End:   1790351107,
+		Begin: time.Unix(1790341107, 0),
+		End:   time.Unix(1790351107, 0),
 	}); err == nil {
 		t.Fatal("ListAllFlights: expected error")
 	} else if _, ok := errors.AsType[*api.ErrorBody](err); !ok {
@@ -326,8 +327,8 @@ func TestClient_Interactions(t *testing.T) {
 	}
 
 	if _, err := c.ListAllFlights(ctx, &ListAllFlightsParams{
-		Begin: 1790433561,
-		End:   1790440761,
+		Begin: time.Unix(1790433561, 0),
+		End:   time.Unix(1790440761, 0),
 	}); err != nil {
 		t.Fatalf("ListAllFlights: %v", err)
 	}

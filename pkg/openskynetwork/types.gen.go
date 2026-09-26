@@ -37,8 +37,8 @@ type ListAllStateVectorsParams struct {
 
 // ListAllFlightsParams holds the query parameters for ListAllFlights.
 type ListAllFlightsParams struct {
-	Begin int
-	End   int
+	Begin time.Time
+	End   time.Time
 }
 
 // CurrentStates defines a model
