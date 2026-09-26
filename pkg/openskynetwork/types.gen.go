@@ -64,10 +64,14 @@ type State struct {
 	// Vertical rate in m/s. A positive value indicates that the airplane is climbing, a negative value indicates that it descends. Can be null.
 	VerticalRate float64
 	// IDs of the receivers which contributed to this state vector. Is null if no filtering for sensor was used in the request.
-	Sensors        struct{}
-	GeoAltitude    float64
-	Squawk         string
-	SPI            bool
+	Sensors []struct{}
+	// Geometric altitude in meters. Can be null.
+	GeoAltitude float64
+	// The transponder code aka Squawk. Can be null.
+	Squawk string
+	// Whether flight status indicates special purpose indicator.
+	SPI bool
+	// Origin of this state’s position.
 	PositionSource int
 }
 

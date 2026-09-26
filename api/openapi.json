@@ -140,26 +140,33 @@
           },
           {
             "description": "IDs of the receivers which contributed to this state vector. Is null if no filtering for sensor was used in the request.",
-            "type": "object",
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
             "example": null,
             "x-go-name": "Sensors"
           },
           {
+            "description": "Geometric altitude in meters. Can be null.",
             "type": "number",
             "format": "double",
             "example": 868.68,
             "x-go-name": "GeoAltitude"
           },
           {
+            "description": "The transponder code aka Squawk. Can be null.",
             "type": "string",
             "example": "1000",
             "x-go-name": "Squawk"
           },
           {
+            "description": "Whether flight status indicates special purpose indicator.",
             "type": "boolean",
             "x-go-name": "SPI"
           },
           {
+            "description": "Origin of this state’s position.",
             "type": "integer",
             "example": 0,
             "x-go-name": "PositionSource"
