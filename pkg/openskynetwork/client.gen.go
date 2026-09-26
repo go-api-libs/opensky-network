@@ -219,8 +219,8 @@ func (c *Client) ListAllFlightsWithResult[R any](ctx context.Context, params *Li
 // Flights by Aircraft
 //
 //	GET /flights/aircraft
-func (c *Client) ListFlightsByAircraft(ctx context.Context, params *ListFlightsByAircraftParams) (ListFlightsAircraftOk, error) {
-	out, err := c.ListFlightsByAircraftWithResult[ListFlightsAircraftOk](ctx, params)
+func (c *Client) ListFlightsByAircraft(ctx context.Context, params *ListFlightsByAircraftParams) (Flights, error) {
+	out, err := c.ListFlightsByAircraftWithResult[Flights](ctx, params)
 	if err != nil {
 		return nil, err
 	}

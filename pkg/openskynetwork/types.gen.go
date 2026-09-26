@@ -80,25 +80,6 @@ type Flights []Flight
 // Forbidden defines a model
 type Forbidden string
 
-// ListFlightsAircraftOk defines a model
-type ListFlightsAircraftOk []ListFlightsAircraftOkItem
-
-// ListFlightsAircraftOkItem defines a model
-type ListFlightsAircraftOkItem struct {
-	Icao24                           string   `json:"icao24,omitzero"`
-	FirstSeen                        int      `json:"firstSeen"`
-	EstDepartureAirport              string   `json:"estDepartureAirport,omitzero"`
-	LastSeen                         int      `json:"lastSeen"`
-	EstArrivalAirport                struct{} `json:"estArrivalAirport"`
-	Callsign                         string   `json:"callsign,omitzero"`
-	EstDepartureAirportHorizDistance int      `json:"estDepartureAirportHorizDistance"`
-	EstDepartureAirportVertDistance  int      `json:"estDepartureAirportVertDistance"`
-	EstArrivalAirportHorizDistance   int      `json:"estArrivalAirportHorizDistance"`
-	EstArrivalAirportVertDistance    int      `json:"estArrivalAirportVertDistance"`
-	DepartureAirportCandidatesCount  int      `json:"departureAirportCandidatesCount"`
-	ArrivalAirportCandidatesCount    int      `json:"arrivalAirportCandidatesCount"`
-}
-
 // Origin of a state’s position.
 type PositionSource int
 
