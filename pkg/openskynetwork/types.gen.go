@@ -25,9 +25,13 @@ var jsonOpts = json.JoinOptions(
 
 // ListAllStateVectorsParams holds the query parameters for ListAllStateVectors.
 type ListAllStateVectorsParams struct {
+	// upper bound for the latitude in decimal degrees
 	Lamax string
+	// lower bound for the latitude in decimal degrees
 	Lamin string
+	// upper bound for the longitude in decimal degrees
 	Lomax string
+	// lower bound for the longitude in decimal degrees
 	Lomin string
 }
 

@@ -212,6 +212,7 @@
       "lamax": {
         "name": "lamax",
         "in": "query",
+        "description": "upper bound for the latitude in decimal degrees",
         "schema": {
           "type": "string",
           "example": "47.8229"
@@ -220,6 +221,7 @@
       "lamin": {
         "name": "lamin",
         "in": "query",
+        "description": "lower bound for the latitude in decimal degrees",
         "schema": {
           "type": "string",
           "example": "45.8389"
@@ -228,6 +230,7 @@
       "lomax": {
         "name": "lomax",
         "in": "query",
+        "description": "upper bound for the longitude in decimal degrees",
         "schema": {
           "type": "string",
           "example": "10.5226"
@@ -236,6 +239,7 @@
       "lomin": {
         "name": "lomin",
         "in": "query",
+        "description": "lower bound for the longitude in decimal degrees",
         "schema": {
           "type": "string",
           "example": "5.9962"
