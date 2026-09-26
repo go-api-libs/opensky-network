@@ -105,8 +105,7 @@
         "type": "object",
         "properties": {
           "icao24": {
-            "type": "string",
-            "example": "008df8"
+            "$ref": "#/components/schemas/ICAO24"
           },
           "firstSeen": {
             "type": "integer",
@@ -177,6 +176,12 @@
       "Forbidden": {
         "type": "string"
       },
+      "ICAO24": {
+        "description": "Unique ICAO 24-bit address of the transponder in hex string representation.",
+        "type": "string",
+        "example": "39de4f",
+        "x-go-name": "ICAO24"
+      },
       "PositionSource": {
         "description": "Origin of a state’s position.",
         "type": "integer",
@@ -199,10 +204,7 @@
         "type": "array",
         "prefixItems": [
           {
-            "description": "Unique ICAO 24-bit address of the transponder in hex string representation.",
-            "type": "string",
-            "example": "39de4f",
-            "x-go-name": "ICAO24"
+            "$ref": "#/components/schemas/ICAO24"
           },
           {
             "description": "Callsign of the vehicle (8 chars). Can be null if no callsign has been received.",
@@ -371,9 +373,9 @@
       "icao24": {
         "name": "icao24",
         "in": "query",
+        "description": "Unique ICAO 24-bit address of the transponder in hex string representation.",
         "schema": {
-          "type": "string",
-          "example": "008df8"
+          "$ref": "#/components/schemas/ICAO24"
         }
       },
       "lamax": {

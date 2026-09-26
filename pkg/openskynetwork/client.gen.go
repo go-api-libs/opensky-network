@@ -246,7 +246,7 @@ func (c *Client) ListFlightsByAircraftWithResult[R any](ctx context.Context, par
 		}
 
 		if params.Icao24 != "" {
-			q["icao24"] = []string{params.Icao24}
+			q["icao24"] = []string{string(params.Icao24)}
 		}
 
 		u.RawQuery = q.Encode()

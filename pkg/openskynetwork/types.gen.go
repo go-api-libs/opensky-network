@@ -48,8 +48,9 @@ type ListFlightsByAircraftParams struct {
 	// Start of time interval to retrieve flights for as Unix time (seconds since epoch)
 	Begin time.Time
 	// End of time interval to retrieve flights for as Unix time (seconds since epoch)
-	End    time.Time
-	Icao24 string
+	End time.Time
+	// Unique ICAO 24-bit address of the transponder in hex string representation.
+	Icao24 ICAO24
 }
 
 // CurrentStates defines a model
@@ -62,7 +63,8 @@ type CurrentStates struct {
 
 // Flight defines a model
 type Flight struct {
-	Icao24                           string `json:"icao24,omitzero"`
+	// Unique ICAO 24-bit address of the transponder in hex string representation.
+	ICAO24                           ICAO24 `json:"icao24,omitzero"`
 	FirstSeen                        int    `json:"firstSeen"`
 	EstDepartureAirport              string `json:"estDepartureAirport,omitzero"`
 	LastSeen                         int    `json:"lastSeen"`
@@ -81,6 +83,9 @@ type Flights []Flight
 
 // Forbidden defines a model
 type Forbidden string
+
+// Unique ICAO 24-bit address of the transponder in hex string representation.
+type ICAO24 string
 
 // Origin of a state’s position.
 type PositionSource int
@@ -105,7 +110,7 @@ func (e PositionSource) Valid() bool {
 // State defines a model
 type State struct {
 	// Unique ICAO 24-bit address of the transponder in hex string representation.
-	ICAO24 string
+	ICAO24 ICAO24
 	// Callsign of the vehicle (8 chars). Can be null if no callsign has been received.
 	Callsign string
 	// Country name inferred from the ICAO 24-bit address.
