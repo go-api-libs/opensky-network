@@ -1099,5 +1099,33 @@
 				}
 			]
 		}
+	},
+	{
+		"request": {
+			"method": "GET",
+			"url": "https://opensky-network.org/api/flights/aircraft?begin=1790433561&end=1790440761&icao24=008df8"
+		},
+		"response": {
+			"statusCode": 200,
+			"header": {
+				"Content-Type": "application/json"
+			},
+			"body": [
+				{
+					"icao24": "008df8",
+					"firstSeen": 1790432152,
+					"estDepartureAirport": "FAOR",
+					"lastSeen": 1790433331,
+					"estArrivalAirport": null,
+					"callsign": "SFR288  ",
+					"estDepartureAirportHorizDistance": 4202,
+					"estDepartureAirportVertDistance": 165,
+					"estArrivalAirportHorizDistance": 0,
+					"estArrivalAirportVertDistance": 0,
+					"departureAirportCandidatesCount": 65,
+					"arrivalAirportCandidatesCount": 0
+				}
+			]
+		}
 	}
 ]

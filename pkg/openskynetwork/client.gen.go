@@ -215,3 +215,76 @@ func (c *Client) ListAllFlightsWithResult[R any](ctx context.Context, params *Li
 		return nil, api.NewErrUnknownStatusCode(rsp)
 	}
 }
+
+// Flights by Aircraft
+//
+//	GET /flights/aircraft
+func (c *Client) ListFlightsByAircraft(ctx context.Context, params *ListFlightsByAircraftParams) (ListFlightsAircraftOk, error) {
+	out, err := c.ListFlightsByAircraftWithResult[ListFlightsAircraftOk](ctx, params)
+	if err != nil {
+		return nil, err
+	}
+
+	return *out, nil
+}
+
+// Flights by Aircraft
+// You can define a custom result to unmarshal the response into.
+//
+//	GET /flights/aircraft
+func (c *Client) ListFlightsByAircraftWithResult[R any](ctx context.Context, params *ListFlightsByAircraftParams) (*R, error) {
+	u := c.baseURL.JoinPath("flights", "aircraft")
+	if params != nil {
+		q := make(url.Values, 3)
+
+		if params.Begin != 0 {
+			q["begin"] = []string{strconv.Itoa(params.Begin)}
+		}
+
+		if params.End != 0 {
+			q["end"] = []string{strconv.Itoa(params.End)}
+		}
+
+		if params.Icao24 != "" {
+			q["icao24"] = []string{params.Icao24}
+		}
+
+		u.RawQuery = q.Encode()
+	}
+
+	req := (&http.Request{
+		Header: http.Header{
+			"User-Agent": []string{c.userAgent},
+		},
+		Host:       u.Host,
+		Method:     http.MethodGet,
+		Proto:      "HTTP/1.1",
+		ProtoMajor: 1,
+		ProtoMinor: 1,
+		URL:        u,
+	}).WithContext(ctx)
+
+	rsp, err := c.cli.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer rsp.Body.Close()
+
+	switch rsp.StatusCode {
+	case http.StatusOK:
+		// OK
+		switch mt, _, _ := strings.Cut(rsp.Header.Get("Content-Type"), ";"); mt {
+		case "application/json":
+			var out R
+			if err := json.UnmarshalRead(rsp.Body, &out, jsonOpts); err != nil {
+				return nil, api.WrapDecodingError(rsp, err)
+			}
+
+			return &out, nil
+		default:
+			return nil, api.NewErrUnknownContentType(rsp)
+		}
+	default:
+		return nil, api.NewErrUnknownStatusCode(rsp)
+	}
+}

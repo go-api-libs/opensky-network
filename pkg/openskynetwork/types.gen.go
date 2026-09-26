@@ -43,6 +43,13 @@ type ListAllFlightsParams struct {
 	End time.Time
 }
 
+// ListFlightsByAircraftParams holds the query parameters for ListFlightsByAircraft.
+type ListFlightsByAircraftParams struct {
+	Begin  int
+	End    int
+	Icao24 string
+}
+
 // CurrentStates defines a model
 type CurrentStates struct {
 	// The time which the state vectors in this response are associated with. All vectors represent the state of a vehicle with the interval [𝑡⁢𝑖⁢𝑚⁢𝑒 −1,𝑡⁢𝑖⁢𝑚⁢𝑒]
@@ -72,6 +79,25 @@ type Flights []Flight
 
 // Forbidden defines a model
 type Forbidden string
+
+// ListFlightsAircraftOk defines a model
+type ListFlightsAircraftOk []ListFlightsAircraftOkItem
+
+// ListFlightsAircraftOkItem defines a model
+type ListFlightsAircraftOkItem struct {
+	Icao24                           string   `json:"icao24,omitzero"`
+	FirstSeen                        int      `json:"firstSeen"`
+	EstDepartureAirport              string   `json:"estDepartureAirport,omitzero"`
+	LastSeen                         int      `json:"lastSeen"`
+	EstArrivalAirport                struct{} `json:"estArrivalAirport"`
+	Callsign                         string   `json:"callsign,omitzero"`
+	EstDepartureAirportHorizDistance int      `json:"estDepartureAirportHorizDistance"`
+	EstDepartureAirportVertDistance  int      `json:"estDepartureAirportVertDistance"`
+	EstArrivalAirportHorizDistance   int      `json:"estArrivalAirportHorizDistance"`
+	EstArrivalAirportVertDistance    int      `json:"estArrivalAirportVertDistance"`
+	DepartureAirportCandidatesCount  int      `json:"departureAirportCandidatesCount"`
+	ArrivalAirportCandidatesCount    int      `json:"arrivalAirportCandidatesCount"`
+}
 
 // Origin of a state’s position.
 type PositionSource int
