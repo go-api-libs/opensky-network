@@ -56,10 +56,14 @@ type State struct {
 	// Barometric altitude in meters. Can be null.
 	BaroAltitude float64
 	// Boolean value which indicates if the position was retrieved from a surface position report.
-	OnGround       bool
-	Velocity       float64
-	TrueTrack      float64
-	VerticalRate   float64
+	OnGround bool
+	// Velocity over ground in m/s. Can be null.
+	Velocity float64
+	// True track in decimal degrees clockwise from north (north=0°). Can be null.
+	TrueTrack float64
+	// Vertical rate in m/s. A positive value indicates that the airplane is climbing, a negative value indicates that it descends. Can be null.
+	VerticalRate float64
+	// IDs of the receivers which contributed to this state vector. Is null if no filtering for sensor was used in the request.
 	Sensors        struct{}
 	GeoAltitude    float64
 	Squawk         string

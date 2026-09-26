@@ -118,24 +118,28 @@
             "x-go-name": "OnGround"
           },
           {
+            "description": "Velocity over ground in m/s. Can be null.",
             "type": "number",
             "format": "double",
             "example": 3.09,
             "x-go-name": "Velocity"
           },
           {
+            "description": "True track in decimal degrees clockwise from north (north=0°). Can be null.",
             "type": "number",
             "format": "double",
             "example": 255.94,
             "x-go-name": "TrueTrack"
           },
           {
+            "description": "Vertical rate in m/s. A positive value indicates that the airplane is climbing, a negative value indicates that it descends. Can be null.",
             "type": "number",
             "format": "double",
             "example": 3.9,
             "x-go-name": "VerticalRate"
           },
           {
+            "description": "IDs of the receivers which contributed to this state vector. Is null if no filtering for sensor was used in the request.",
             "type": "object",
             "example": null,
             "x-go-name": "Sensors"
