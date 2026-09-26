@@ -160,7 +160,8 @@
             "description": "IDs of the receivers which contributed to this state vector. Is null if no filtering for sensor was used in the request.",
             "type": "array",
             "items": {
-              "type": "object"
+              "type": "object",
+              "example": null
             },
             "example": null,
             "x-go-name": "Sensors"
