@@ -7,8 +7,10 @@ package openskynetwork
 import (
 	"context"
 	"encoding/json/v2"
+	"io"
 	"net/http"
 	"net/url"
+	"strconv"
 	"strings"
 
 	"github.com/go-api-libs/api"
@@ -19,7 +21,7 @@ const defaultUserAgent = "API"
 var defaultBaseURL = &url.URL{
 	Scheme: "https",
 	Host:   "opensky-network.org",
-	Path:   "/",
+	Path:   "/api",
 }
 
 // Client is an HTTP client for the openskynetwork API.
@@ -67,7 +69,7 @@ func NewClient(opts ...ClientOption) (*Client, error) {
 
 // All State Vectors
 //
-//	GET /api/states/all
+//	GET /states/all
 func (c *Client) ListAllStateVectors(ctx context.Context, params *ListAllStateVectorsParams) (*CurrentStates, error) {
 	return c.ListAllStateVectorsWithResult[CurrentStates](ctx, params)
 }
@@ -75,9 +77,9 @@ func (c *Client) ListAllStateVectors(ctx context.Context, params *ListAllStateVe
 // All State Vectors
 // You can define a custom result to unmarshal the response into.
 //
-//	GET /api/states/all
+//	GET /states/all
 func (c *Client) ListAllStateVectorsWithResult[R any](ctx context.Context, params *ListAllStateVectorsParams) (*R, error) {
-	u := c.baseURL.JoinPath("api", "states", "all")
+	u := c.baseURL.JoinPath("states", "all")
 	if params != nil {
 		q := make(url.Values, 4)
 
@@ -129,6 +131,83 @@ func (c *Client) ListAllStateVectorsWithResult[R any](ctx context.Context, param
 			}
 
 			return &out, nil
+		default:
+			return nil, api.NewErrUnknownContentType(rsp)
+		}
+	default:
+		return nil, api.NewErrUnknownStatusCode(rsp)
+	}
+}
+
+// GET /flights/all
+func (c *Client) ListAPIFlightsAll(ctx context.Context, params *ListAPIFlightsAllParams) (ListAPIFlightsAllOk, error) {
+	out, err := c.ListAPIFlightsAllWithResult[ListAPIFlightsAllOk](ctx, params)
+	if err != nil {
+		return nil, err
+	}
+
+	return *out, nil
+}
+
+// GET /flights/all
+func (c *Client) ListAPIFlightsAllWithResult[R any](ctx context.Context, params *ListAPIFlightsAllParams) (*R, error) {
+	u := c.baseURL.JoinPath("flights", "all")
+	if params != nil {
+		q := make(url.Values, 2)
+
+		if params.Begin != 0 {
+			q["begin"] = []string{strconv.Itoa(params.Begin)}
+		}
+
+		if params.End != 0 {
+			q["end"] = []string{strconv.Itoa(params.End)}
+		}
+
+		u.RawQuery = q.Encode()
+	}
+
+	req := (&http.Request{
+		Header: http.Header{
+			"User-Agent": []string{c.userAgent},
+		},
+		Host:       u.Host,
+		Method:     http.MethodGet,
+		Proto:      "HTTP/1.1",
+		ProtoMajor: 1,
+		ProtoMinor: 1,
+		URL:        u,
+	}).WithContext(ctx)
+
+	rsp, err := c.cli.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer rsp.Body.Close()
+
+	switch rsp.StatusCode {
+	case http.StatusOK:
+		// OK
+		switch mt, _, _ := strings.Cut(rsp.Header.Get("Content-Type"), ";"); mt {
+		case "application/json":
+			var out R
+			if err := json.UnmarshalRead(rsp.Body, &out, jsonOpts); err != nil {
+				return nil, api.WrapDecodingError(rsp, err)
+			}
+
+			return &out, nil
+		default:
+			return nil, api.NewErrUnknownContentType(rsp)
+		}
+	case http.StatusForbidden:
+		// Forbidden
+		switch mt, _, _ := strings.Cut(rsp.Header.Get("Content-Type"), ";"); mt {
+		case "text/plain":
+			out, err := io.ReadAll(rsp.Body)
+			if err != nil {
+				return nil, api.WrapDecodingError(rsp, err)
+			}
+
+			return nil, api.NewErrBody(rsp, out)
 		default:
 			return nil, api.NewErrUnknownContentType(rsp)
 		}

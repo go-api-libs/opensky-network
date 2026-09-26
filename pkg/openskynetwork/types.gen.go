@@ -35,12 +35,40 @@ type ListAllStateVectorsParams struct {
 	Lomin string
 }
 
+// ListAPIFlightsAllParams holds the query parameters for ListAPIFlightsAll.
+type ListAPIFlightsAllParams struct {
+	Begin int
+	End   int
+}
+
 // CurrentStates defines a model
 type CurrentStates struct {
 	// The time which the state vectors in this response are associated with. All vectors represent the state of a vehicle with the interval [𝑡⁢𝑖⁢𝑚⁢𝑒 −1,𝑡⁢𝑖⁢𝑚⁢𝑒]
 	Time time.Time `json:"time"`
 	// The state vectors.
 	States States `json:"states"`
+}
+
+// ListAPIFlightsAllForbidden defines a model
+type ListAPIFlightsAllForbidden string
+
+// ListAPIFlightsAllOk defines a model
+type ListAPIFlightsAllOk []ListAPIFlightsAllOkItem
+
+// ListAPIFlightsAllOkItem defines a model
+type ListAPIFlightsAllOkItem struct {
+	Icao24                           string `json:"icao24,omitzero"`
+	FirstSeen                        int    `json:"firstSeen"`
+	EstDepartureAirport              string `json:"estDepartureAirport,omitzero"`
+	LastSeen                         int    `json:"lastSeen"`
+	EstArrivalAirport                string `json:"estArrivalAirport,omitzero"`
+	Callsign                         string `json:"callsign,omitzero"`
+	EstDepartureAirportHorizDistance int    `json:"estDepartureAirportHorizDistance"`
+	EstDepartureAirportVertDistance  int    `json:"estDepartureAirportVertDistance"`
+	EstArrivalAirportHorizDistance   int    `json:"estArrivalAirportHorizDistance"`
+	EstArrivalAirportVertDistance    int    `json:"estArrivalAirportVertDistance"`
+	DepartureAirportCandidatesCount  int    `json:"departureAirportCandidatesCount"`
+	ArrivalAirportCandidatesCount    int    `json:"arrivalAirportCandidatesCount"`
 }
 
 // Origin of a state’s position.

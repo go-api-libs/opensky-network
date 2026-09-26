@@ -792,5 +792,312 @@
 				]
 			}
 		}
+	},
+	{
+		"request": {
+			"method": "GET",
+			"url": "https://opensky-network.org/api/flights/all?begin=1790341107&end=1790351107"
+		},
+		"response": {
+			"statusCode": 403,
+			"header": {
+				"Content-Type": "text/plain;charset=UTF-8"
+			},
+			"body": "You cannot access historical flights"
+		}
+	},
+	{
+		"request": {
+			"method": "GET",
+			"url": "https://opensky-network.org/api/flights/all?begin=1790433561&end=1790440761"
+		},
+		"response": {
+			"statusCode": 200,
+			"header": {
+				"Content-Type": "application/json"
+			},
+			"body": [
+				{
+					"icao24": "008df8",
+					"firstSeen": 1790432152,
+					"estDepartureAirport": "FAOR",
+					"lastSeen": 1790433331,
+					"estArrivalAirport": null,
+					"callsign": "SFR288  ",
+					"estDepartureAirportHorizDistance": 4202,
+					"estDepartureAirportVertDistance": 165,
+					"estArrivalAirportHorizDistance": 0,
+					"estArrivalAirportVertDistance": 0,
+					"departureAirportCandidatesCount": 65,
+					"arrivalAirportCandidatesCount": 0
+				},
+				{
+					"icao24": "009fc7",
+					"firstSeen": 1790434150,
+					"estDepartureAirport": "FALA",
+					"lastSeen": 1790435285,
+					"estArrivalAirport": "FAWI",
+					"callsign": "ZSMAG   ",
+					"estDepartureAirportHorizDistance": 1960,
+					"estDepartureAirportVertDistance": 177,
+					"estArrivalAirportHorizDistance": 56354,
+					"estArrivalAirportVertDistance": 2292,
+					"departureAirportCandidatesCount": 64,
+					"arrivalAirportCandidatesCount": 42
+				},
+				{
+					"icao24": "040101",
+					"firstSeen": 1790400923,
+					"estDepartureAirport": "LIRF",
+					"lastSeen": 1790433679,
+					"estArrivalAirport": null,
+					"callsign": "ETH717  ",
+					"estDepartureAirportHorizDistance": 499,
+					"estDepartureAirportVertDistance": 56,
+					"estArrivalAirportHorizDistance": 0,
+					"estArrivalAirportVertDistance": 0,
+					"departureAirportCandidatesCount": 19,
+					"arrivalAirportCandidatesCount": 0
+				},
+				{
+					"icao24": "04c1c0",
+					"firstSeen": 1790432491,
+					"estDepartureAirport": "HKJK",
+					"lastSeen": 1790433100,
+					"estArrivalAirport": "HKNV",
+					"callsign": "JMA8656 ",
+					"estDepartureAirportHorizDistance": 2841,
+					"estDepartureAirportVertDistance": 188,
+					"estArrivalAirportHorizDistance": 23368,
+					"estArrivalAirportVertDistance": 4014,
+					"departureAirportCandidatesCount": 26,
+					"arrivalAirportCandidatesCount": 0
+				},
+				{
+					"icao24": "0a80c2",
+					"firstSeen": 1790432683,
+					"estDepartureAirport": "KMIA",
+					"lastSeen": 1790433995,
+					"estArrivalAirport": "MYAN",
+					"callsign": "BHS222  ",
+					"estDepartureAirportHorizDistance": 1581,
+					"estDepartureAirportVertDistance": 249,
+					"estArrivalAirportHorizDistance": 29099,
+					"estArrivalAirportVertDistance": 3846,
+					"departureAirportCandidatesCount": 126,
+					"arrivalAirportCandidatesCount": 0
+				},
+				{
+					"icao24": "0ac3a2",
+					"firstSeen": 1790432953,
+					"estDepartureAirport": "SKBQ",
+					"lastSeen": 1790434001,
+					"estArrivalAirport": null,
+					"callsign": "HK3117  ",
+					"estDepartureAirportHorizDistance": 18234,
+					"estDepartureAirportVertDistance": 1677,
+					"estArrivalAirportHorizDistance": 0,
+					"estArrivalAirportVertDistance": 0,
+					"departureAirportCandidatesCount": 16,
+					"arrivalAirportCandidatesCount": 0
+				},
+				{
+					"icao24": "0ac425",
+					"firstSeen": 1790431248,
+					"estDepartureAirport": "SKBO",
+					"lastSeen": 1790433483,
+					"estArrivalAirport": "SKPE",
+					"callsign": "EFY8940 ",
+					"estDepartureAirportHorizDistance": 1728,
+					"estDepartureAirportVertDistance": 132,
+					"estArrivalAirportHorizDistance": 93527,
+					"estArrivalAirportVertDistance": 2395,
+					"departureAirportCandidatesCount": 17,
+					"arrivalAirportCandidatesCount": 5
+				},
+				{
+					"icao24": "0ac95b",
+					"firstSeen": 1790431674,
+					"estDepartureAirport": "SKBO",
+					"lastSeen": 1790433006,
+					"estArrivalAirport": "SKRG",
+					"callsign": "AVA8432 ",
+					"estDepartureAirportHorizDistance": 1963,
+					"estDepartureAirportVertDistance": 132,
+					"estArrivalAirportHorizDistance": 46855,
+					"estArrivalAirportVertDistance": 2132,
+					"departureAirportCandidatesCount": 17,
+					"arrivalAirportCandidatesCount": 5
+				},
+				{
+					"icao24": "0ac9ab",
+					"firstSeen": 1790431371,
+					"estDepartureAirport": "SKBO",
+					"lastSeen": 1790433239,
+					"estArrivalAirport": "SKMZ",
+					"callsign": "EFY7834 ",
+					"estDepartureAirportHorizDistance": 1845,
+					"estDepartureAirportVertDistance": 140,
+					"estArrivalAirportHorizDistance": 20185,
+					"estArrivalAirportVertDistance": 839,
+					"departureAirportCandidatesCount": 17,
+					"arrivalAirportCandidatesCount": 19
+				},
+				{
+					"icao24": "0acb2e",
+					"firstSeen": 1790435964,
+					"estDepartureAirport": "SKMD",
+					"lastSeen": 1790436606,
+					"estArrivalAirport": "SKMD",
+					"callsign": "HK5233  ",
+					"estDepartureAirportHorizDistance": 151,
+					"estDepartureAirportVertDistance": 45,
+					"estArrivalAirportHorizDistance": 35426,
+					"estArrivalAirportVertDistance": 1691,
+					"departureAirportCandidatesCount": 28,
+					"arrivalAirportCandidatesCount": 14
+				},
+				{
+					"icao24": "0accad",
+					"firstSeen": 1790432665,
+					"estDepartureAirport": "SKMD",
+					"lastSeen": 1790433075,
+					"estArrivalAirport": "SKMD",
+					"callsign": "EFY8946 ",
+					"estDepartureAirportHorizDistance": 426,
+					"estDepartureAirportVertDistance": 30,
+					"estArrivalAirportHorizDistance": 21328,
+					"estArrivalAirportVertDistance": 1829,
+					"departureAirportCandidatesCount": 28,
+					"arrivalAirportCandidatesCount": 11
+				},
+				{
+					"icao24": "0b417e",
+					"firstSeen": 1790434120,
+					"estDepartureAirport": "MGGT",
+					"lastSeen": 1790434646,
+					"estArrivalAirport": "MGGT",
+					"callsign": "TGPAP   ",
+					"estDepartureAirportHorizDistance": 943,
+					"estDepartureAirportVertDistance": 107,
+					"estArrivalAirportHorizDistance": 27190,
+					"estArrivalAirportVertDistance": 1203,
+					"departureAirportCandidatesCount": 35,
+					"arrivalAirportCandidatesCount": 21
+				},
+				{
+					"icao24": "0c200b",
+					"firstSeen": 1790410995,
+					"estDepartureAirport": "MGGT",
+					"lastSeen": 1790433557,
+					"estArrivalAirport": null,
+					"callsign": "CMP183  ",
+					"estDepartureAirportHorizDistance": 4337,
+					"estDepartureAirportVertDistance": 410,
+					"estArrivalAirportHorizDistance": 0,
+					"estArrivalAirportVertDistance": 0,
+					"departureAirportCandidatesCount": 35,
+					"arrivalAirportCandidatesCount": 0
+				},
+				{
+					"icao24": "0d09bd",
+					"firstSeen": 1790431299,
+					"estDepartureAirport": null,
+					"lastSeen": 1790433978,
+					"estArrivalAirport": null,
+					"callsign": "VOI1104 ",
+					"estDepartureAirportHorizDistance": 0,
+					"estDepartureAirportVertDistance": 0,
+					"estArrivalAirportHorizDistance": 0,
+					"estArrivalAirportVertDistance": 0,
+					"departureAirportCandidatesCount": 0,
+					"arrivalAirportCandidatesCount": 0
+				},
+				{
+					"icao24": "0d09ce",
+					"firstSeen": 1790433608,
+					"estDepartureAirport": null,
+					"lastSeen": 1790436062,
+					"estArrivalAirport": "MMJC",
+					"callsign": "VIV9223 ",
+					"estDepartureAirportHorizDistance": 0,
+					"estDepartureAirportVertDistance": 0,
+					"estArrivalAirportHorizDistance": 16439,
+					"estArrivalAirportVertDistance": 420,
+					"departureAirportCandidatesCount": 0,
+					"arrivalAirportCandidatesCount": 13
+				},
+				{
+					"icao24": "0d0d6d",
+					"firstSeen": 1790432616,
+					"estDepartureAirport": "MMVR",
+					"lastSeen": 1790434982,
+					"estArrivalAirport": null,
+					"callsign": "VOI537  ",
+					"estDepartureAirportHorizDistance": 1391,
+					"estDepartureAirportVertDistance": 269,
+					"estArrivalAirportHorizDistance": 0,
+					"estArrivalAirportVertDistance": 0,
+					"departureAirportCandidatesCount": 5,
+					"arrivalAirportCandidatesCount": 0
+				},
+				{
+					"icao24": "0d0fa8",
+					"firstSeen": 1790432321,
+					"estDepartureAirport": "MMPB",
+					"lastSeen": 1790433517,
+					"estArrivalAirport": "MMTA",
+					"callsign": "XBPBH   ",
+					"estDepartureAirportHorizDistance": 7039,
+					"estDepartureAirportVertDistance": 255,
+					"estArrivalAirportHorizDistance": 29968,
+					"estArrivalAirportVertDistance": 577,
+					"departureAirportCandidatesCount": 14,
+					"arrivalAirportCandidatesCount": 13
+				},
+				{
+					"icao24": "0d11d3",
+					"firstSeen": 1790429870,
+					"estDepartureAirport": "MMPB",
+					"lastSeen": 1790434773,
+					"estArrivalAirport": "MMCH",
+					"callsign": "XBAEB   ",
+					"estDepartureAirportHorizDistance": 1886,
+					"estDepartureAirportVertDistance": 71,
+					"estArrivalAirportHorizDistance": 18822,
+					"estArrivalAirportVertDistance": 2514,
+					"departureAirportCandidatesCount": 14,
+					"arrivalAirportCandidatesCount": 2
+				},
+				{
+					"icao24": "0d122a",
+					"firstSeen": 1790435797,
+					"estDepartureAirport": "MMAN",
+					"lastSeen": 1790438457,
+					"estArrivalAirport": "MMAN",
+					"callsign": "XAEFA   ",
+					"estDepartureAirportHorizDistance": 787,
+					"estDepartureAirportVertDistance": 38,
+					"estArrivalAirportHorizDistance": 780,
+					"estArrivalAirportVertDistance": 38,
+					"departureAirportCandidatesCount": 19,
+					"arrivalAirportCandidatesCount": 19
+				},
+				{
+					"icao24": "151d9e",
+					"firstSeen": 1790432597,
+					"estDepartureAirport": null,
+					"lastSeen": 1790434142,
+					"estArrivalAirport": null,
+					"callsign": "AFL2156 ",
+					"estDepartureAirportHorizDistance": 0,
+					"estDepartureAirportVertDistance": 0,
+					"estArrivalAirportHorizDistance": 0,
+					"estArrivalAirportVertDistance": 0,
+					"departureAirportCandidatesCount": 0,
+					"arrivalAirportCandidatesCount": 0
+				}
+			]
+		}
 	}
 ]

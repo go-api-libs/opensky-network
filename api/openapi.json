@@ -7,11 +7,11 @@
   },
   "servers": [
     {
-      "url": "https://opensky-network.org"
+      "url": "https://opensky-network.org/api"
     }
   ],
   "paths": {
-    "/api/states/all": {
+    "/states/all": {
       "parameters": [
         {
           "$ref": "#/components/parameters/lamax"
@@ -32,6 +32,27 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/CurrentStates"
+          }
+        }
+      }
+    },
+    "/flights/all": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/begin"
+        },
+        {
+          "$ref": "#/components/parameters/end"
+        }
+      ],
+      "get": {
+        "operationId": "ListAPIFlightsAll",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ListAPIFlightsAllOkResponse"
+          },
+          "403": {
+            "$ref": "#/components/responses/ListAPIFlightsAllForbiddenResponse"
           }
         }
       }
@@ -56,6 +77,82 @@
         "required": [
           "time",
           "states"
+        ]
+      },
+      "ListAPIFlightsAllForbidden": {
+        "type": "string"
+      },
+      "ListAPIFlightsAllOk": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/ListAPIFlightsAllOkItem"
+        }
+      },
+      "ListAPIFlightsAllOkItem": {
+        "type": "object",
+        "properties": {
+          "icao24": {
+            "type": "string",
+            "example": "008df8"
+          },
+          "firstSeen": {
+            "type": "integer",
+            "example": 1790432152
+          },
+          "estDepartureAirport": {
+            "type": "string",
+            "example": "FAOR"
+          },
+          "lastSeen": {
+            "type": "integer",
+            "example": 1790433331
+          },
+          "estArrivalAirport": {
+            "type": "string",
+            "example": "FAWI"
+          },
+          "callsign": {
+            "type": "string",
+            "example": "SFR288  "
+          },
+          "estDepartureAirportHorizDistance": {
+            "type": "integer",
+            "example": 4202
+          },
+          "estDepartureAirportVertDistance": {
+            "type": "integer",
+            "example": 165
+          },
+          "estArrivalAirportHorizDistance": {
+            "type": "integer",
+            "example": 0
+          },
+          "estArrivalAirportVertDistance": {
+            "type": "integer",
+            "example": 0
+          },
+          "departureAirportCandidatesCount": {
+            "type": "integer",
+            "example": 65
+          },
+          "arrivalAirportCandidatesCount": {
+            "type": "integer",
+            "example": 0
+          }
+        },
+        "required": [
+          "icao24",
+          "firstSeen",
+          "estDepartureAirport",
+          "lastSeen",
+          "estArrivalAirport",
+          "callsign",
+          "estDepartureAirportHorizDistance",
+          "estDepartureAirportVertDistance",
+          "estArrivalAirportHorizDistance",
+          "estArrivalAirportVertDistance",
+          "departureAirportCandidatesCount",
+          "arrivalAirportCandidatesCount"
         ]
       },
       "PositionSource": {
@@ -208,9 +305,43 @@
             }
           }
         }
+      },
+      "ListAPIFlightsAllForbiddenResponse": {
+        "description": "Forbidden",
+        "content": {
+          "text/plain": {
+            "schema": {
+              "$ref": "#/components/schemas/ListAPIFlightsAllForbidden"
+            }
+          }
+        }
+      },
+      "ListAPIFlightsAllOkResponse": {
+        "description": "OK",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ListAPIFlightsAllOk"
+            }
+          }
+        }
       }
     },
     "parameters": {
+      "begin": {
+        "name": "begin",
+        "in": "query",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "end": {
+        "name": "end",
+        "in": "query",
+        "schema": {
+          "type": "integer"
+        }
+      },
       "lamax": {
         "name": "lamax",
         "in": "query",
