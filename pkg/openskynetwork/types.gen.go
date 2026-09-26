@@ -37,6 +37,26 @@ type CurrentStates struct {
 	States States    `json:"states"`
 }
 
+// Origin of a state’s position.
+type PositionSource int
+
+const (
+	PositionSourceAdsb    PositionSource = 0
+	PositionSourceAsterix PositionSource = 1
+	PositionSourceMlat    PositionSource = 2
+	PositionSourceFlarm   PositionSource = 3
+)
+
+// Valid indicates whether the value is a known member of the PositionSource enum.
+func (e PositionSource) Valid() bool {
+	switch e {
+	case PositionSourceAdsb, PositionSourceAsterix, PositionSourceMlat, PositionSourceFlarm:
+		return true
+	default:
+		return false
+	}
+}
+
 // State defines a model
 type State struct {
 	// Unique ICAO 24-bit address of the transponder in hex string representation.
@@ -72,7 +92,7 @@ type State struct {
 	// Whether flight status indicates special purpose indicator.
 	SPI bool
 	// Origin of this state’s position.
-	PositionSource int
+	PositionSource PositionSource
 }
 
 func (a *State) Items(yield func(int, any) bool) {

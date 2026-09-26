@@ -56,6 +56,24 @@
           "states"
         ]
       },
+      "PositionSource": {
+        "description": "Origin of a state’s position.",
+        "type": "integer",
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "example": 0,
+        "x-go-name": "PositionSource",
+        "x-enumNames": [
+          "ADSB",
+          "ASTERIX",
+          "MLAT",
+          "FLARM"
+        ]
+      },
       "State": {
         "type": "array",
         "prefixItems": [
@@ -166,10 +184,8 @@
             "x-go-name": "SPI"
           },
           {
-            "description": "Origin of this state’s position.",
-            "type": "integer",
-            "example": 0,
-            "x-go-name": "PositionSource"
+            "$ref": "#/components/schemas/PositionSource",
+            "description": "Origin of this state’s position."
           }
         ]
       },
