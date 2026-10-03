@@ -64,12 +64,12 @@ type CurrentStates struct {
 // Flight defines a model
 type Flight struct {
 	// Unique ICAO 24-bit address of the transponder in hex string representation.
-	ICAO24                           ICAO24 `json:"icao24,omitzero"`
+	ICAO24                           ICAO24 `json:"icao24"`
 	FirstSeen                        int    `json:"firstSeen"`
-	EstDepartureAirport              string `json:"estDepartureAirport,omitzero"`
+	EstDepartureAirport              string `json:"estDepartureAirport"`
 	LastSeen                         int    `json:"lastSeen"`
-	EstArrivalAirport                string `json:"estArrivalAirport,omitzero"`
-	Callsign                         string `json:"callsign,omitzero"`
+	EstArrivalAirport                string `json:"estArrivalAirport"`
+	Callsign                         string `json:"callsign"`
 	EstDepartureAirportHorizDistance int    `json:"estDepartureAirportHorizDistance"`
 	EstDepartureAirportVertDistance  int    `json:"estDepartureAirportVertDistance"`
 	EstArrivalAirportHorizDistance   int    `json:"estArrivalAirportHorizDistance"`

@@ -92,8 +92,8 @@
             "example": 1790341107
           },
           "states": {
-            "$ref": "#/components/schemas/States",
-            "description": "The state vectors."
+            "description": "The state vectors.",
+            "$ref": "#/components/schemas/States"
           }
         },
         "required": [
@@ -112,7 +112,10 @@
             "example": 1790432152
           },
           "estDepartureAirport": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "example": "FAOR"
           },
           "lastSeen": {
@@ -120,7 +123,10 @@
             "example": 1790433331
           },
           "estArrivalAirport": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "example": "FAWI"
           },
           "callsign": {
@@ -248,7 +254,10 @@
           },
           {
             "description": "Barometric altitude in meters. Can be null.",
-            "type": "number",
+            "type": [
+              "number",
+              "null"
+            ],
             "format": "double",
             "example": 792.48,
             "x-go-name": "BaroAltitude"
@@ -274,30 +283,41 @@
           },
           {
             "description": "Vertical rate in m/s. A positive value indicates that the airplane is climbing, a negative value indicates that it descends. Can be null.",
-            "type": "number",
+            "type": [
+              "number",
+              "null"
+            ],
             "format": "double",
             "example": 3.9,
             "x-go-name": "VerticalRate"
           },
           {
             "description": "IDs of the receivers which contributed to this state vector. Is null if no filtering for sensor was used in the request.",
-            "type": "array",
+            "type": [
+              "array",
+              "null"
+            ],
             "items": {
               "type": "integer"
             },
-            "example": null,
             "x-go-name": "Sensors"
           },
           {
             "description": "Geometric altitude in meters. Can be null.",
-            "type": "number",
+            "type": [
+              "number",
+              "null"
+            ],
             "format": "double",
             "example": 868.68,
             "x-go-name": "GeoAltitude"
           },
           {
             "description": "The transponder code aka Squawk. Can be null.",
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
             "example": "1000",
             "x-go-name": "Squawk"
           },
@@ -307,8 +327,8 @@
             "x-go-name": "SPI"
           },
           {
-            "$ref": "#/components/schemas/PositionSource",
-            "description": "Origin of this state’s position."
+            "description": "Origin of this state’s position.",
+            "$ref": "#/components/schemas/PositionSource"
           }
         ]
       },
