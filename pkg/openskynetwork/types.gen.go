@@ -16,10 +16,10 @@ import (
 var jsonOpts = json.JoinOptions(
 	json.RejectUnknownMembers(true),
 	json.WithMarshalers(json.JoinMarshalers(
-		json.MarshalToFunc(jsonutil.TimeMarshalIntUnix),
+		json.MarshalToFunc(jsonutil.TimeMarshalIntUnixFor("time")),
 	)),
 	json.WithUnmarshalers(json.JoinUnmarshalers(
-		json.UnmarshalFromFunc(jsonutil.TimeUnmarshalIntUnix),
+		json.UnmarshalFromFunc(jsonutil.TimeUnmarshalIntUnixFor("time")),
 	)),
 )
 
