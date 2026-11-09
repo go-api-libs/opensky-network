@@ -6,6 +6,7 @@ package openskynetwork
 
 import (
 	"encoding/json/jsontext"
+	"encoding/json/v2"
 	"errors"
 	"io"
 	"net/http"
@@ -26,6 +27,41 @@ func newTestServer(t *testing.T, status int) *httptest.Server {
 	}))
 	t.Cleanup(srv.Close)
 	return srv
+}
+
+// newBodyServer is the base URL of a server that answers every request with status, contentType and body.
+func newBodyServer(t *testing.T, status int, contentType string, body []byte) *url.URL {
+	t.Helper()
+
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", contentType)
+		w.WriteHeader(status)
+		_, _ = w.Write(body)
+	}))
+	t.Cleanup(srv.Close)
+
+	u, err := url.Parse(srv.URL)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	return u
+}
+
+// withUnknownMember is v as JSON, with a member no type declares added to it.
+func withUnknownMember(t *testing.T, v any) []byte {
+	t.Helper()
+
+	b, err := json.Marshal(v, jsonOpts)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if string(b) == "{}" {
+		return []byte(`{"not_a_member_of_any_type": true}`)
+	}
+
+	return append([]byte(`{"not_a_member_of_any_type": true, `), b[1:]...)
 }
 
 type roundTripFunc func(*http.Request) (*http.Response, error)
@@ -123,6 +159,23 @@ func TestClient_Error(t *testing.T) {
 				t.Fatalf("got: %T, want: *api.DecodingError", err)
 			} else if _, ok := errors.AsType[*jsontext.SyntacticError](decErr.Err); !ok {
 				t.Fatalf("got: %T, want: *jsontext.SyntacticError", decErr.Err)
+			}
+		})
+
+		t.Run("unknown member", func(t *testing.T) {
+			c, err := NewClient(WithBaseURL(newBodyServer(t, http.StatusOK, "application/json", withUnknownMember(t, CurrentStates{}))))
+			if err != nil {
+				t.Fatal(err)
+			}
+
+			if _, err := c.ListAllStateVectors(t.Context(), nil); err == nil {
+				t.Fatal("the package's own type accepted a member it does not declare")
+			} else if _, ok := errors.AsType[*api.DecodingError](err); !ok {
+				t.Fatalf("got: %T, want: *api.DecodingError", err)
+			}
+
+			if _, err := c.ListAllStateVectorsWithResult[struct{}](t.Context(), nil); err != nil {
+				t.Fatalf("a type of the caller's own: %v", err)
 			}
 		})
 	})
@@ -309,6 +362,75 @@ func TestClient_Error(t *testing.T) {
 				t.Fatalf("got: %T, want: *jsontext.SyntacticError", decErr.Err)
 			}
 		})
+	})
+}
+
+// TestClient_Params sets every parameter it can to a value other than its zero value, and finds each in the request,
+// under its name and written as the client must write it.
+func TestClient_Params(t *testing.T) {
+	t.Run("ListAllStateVectors", func(t *testing.T) {
+		var got *http.Request
+
+		c, err := NewClient(WithHTTPClient(&http.Client{Transport: roundTripFunc(
+			func(r *http.Request) (*http.Response, error) {
+				got = r
+
+				return &http.Response{StatusCode: http.StatusTeapot, Header: http.Header{}, Body: http.NoBody, Request: r}, nil
+			},
+		)}))
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		_, _ = c.ListAllStateVectors(t.Context(), &ListAllStateVectorsParams{
+			Lamax: "lamax",
+			Lamin: "lamin",
+			Lomax: "lomax",
+			Lomin: "lomin",
+		})
+
+		if got == nil {
+			t.Fatal("no request was sent")
+		}
+
+		if v := got.URL.Query().Get("lamax"); v != "lamax" {
+			t.Errorf("query %s: got %q, want %q", "lamax", v, "lamax")
+		}
+		if v := got.URL.Query().Get("lamin"); v != "lamin" {
+			t.Errorf("query %s: got %q, want %q", "lamin", v, "lamin")
+		}
+		if v := got.URL.Query().Get("lomax"); v != "lomax" {
+			t.Errorf("query %s: got %q, want %q", "lomax", v, "lomax")
+		}
+		if v := got.URL.Query().Get("lomin"); v != "lomin" {
+			t.Errorf("query %s: got %q, want %q", "lomin", v, "lomin")
+		}
+	})
+	t.Run("ListFlightsByAircraft", func(t *testing.T) {
+		var got *http.Request
+
+		c, err := NewClient(WithHTTPClient(&http.Client{Transport: roundTripFunc(
+			func(r *http.Request) (*http.Response, error) {
+				got = r
+
+				return &http.Response{StatusCode: http.StatusTeapot, Header: http.Header{}, Body: http.NoBody, Request: r}, nil
+			},
+		)}))
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		_, _ = c.ListFlightsByAircraft(t.Context(), &ListFlightsByAircraftParams{
+			Icao24: ICAO24("icao24"),
+		})
+
+		if got == nil {
+			t.Fatal("no request was sent")
+		}
+
+		if v := got.URL.Query().Get("icao24"); v != "icao24" {
+			t.Errorf("query %s: got %q, want %q", "icao24", v, "icao24")
+		}
 	})
 }
 

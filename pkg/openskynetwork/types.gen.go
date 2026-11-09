@@ -128,7 +128,7 @@ type State struct {
 	// WGS-84 latitude in decimal degrees. Can be null.
 	Latitude float64
 	// Barometric altitude in meters. Can be null.
-	BaroAltitude float64
+	BaroAltitude *float64
 	// Boolean value which indicates if the position was retrieved from a surface position report.
 	OnGround bool
 	// Velocity over ground in m/s. Can be null.
@@ -136,11 +136,11 @@ type State struct {
 	// True track in decimal degrees clockwise from north (north=0°). Can be null.
 	TrueTrack float64
 	// Vertical rate in m/s. A positive value indicates that the airplane is climbing, a negative value indicates that it descends. Can be null.
-	VerticalRate float64
+	VerticalRate *float64
 	// IDs of the receivers which contributed to this state vector. Is null if no filtering for sensor was used in the request.
 	Sensors []int
 	// Geometric altitude in meters. Can be null.
-	GeoAltitude float64
+	GeoAltitude *float64
 	// The transponder code aka Squawk. Can be null.
 	Squawk string
 	// Whether flight status indicates special purpose indicator.
