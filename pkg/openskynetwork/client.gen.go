@@ -75,14 +75,6 @@ func NewClient(opts ...ClientOption) (*Client, error) {
 //
 //	GET /states/all
 func (c *Client) ListAllStateVectors(ctx context.Context, params *ListAllStateVectorsParams) (*CurrentStates, error) {
-	return c.ListAllStateVectorsWithResult[CurrentStates](ctx, params)
-}
-
-// All State Vectors
-// You can define a custom result to unmarshal the response into.
-//
-//	GET /states/all
-func (c *Client) ListAllStateVectorsWithResult[R any](ctx context.Context, params *ListAllStateVectorsParams) (*R, error) {
 	u := c.baseURL.JoinPath("states", "all")
 	if params != nil {
 		q := make(url.Values, 4)
@@ -129,15 +121,8 @@ func (c *Client) ListAllStateVectorsWithResult[R any](ctx context.Context, param
 		// OK
 		switch mt, _, _ := strings.Cut(rsp.Header.Get("Content-Type"), ";"); mt {
 		case "application/json":
-			var out R
-
-			// a type of the caller's own declares only what it needs of the response, so it is decoded leniently
-			opts := jsonOptsLenient
-			if _, ok := any(&out).(*CurrentStates); ok {
-				opts = jsonOpts
-			}
-
-			if err := json.UnmarshalRead(rsp.Body, &out, opts); err != nil {
+			var out CurrentStates
+			if err := json.UnmarshalRead(rsp.Body, &out, jsonOpts); err != nil {
 				return nil, api.WrapDecodingError(rsp, err)
 			}
 
@@ -152,16 +137,6 @@ func (c *Client) ListAllStateVectorsWithResult[R any](ctx context.Context, param
 
 // GET /flights/all
 func (c *Client) ListAllFlights(ctx context.Context, params *ListAllFlightsParams) (Flights, error) {
-	out, err := c.ListAllFlightsWithResult[Flights](ctx, params)
-	if err != nil {
-		return nil, err
-	}
-
-	return *out, nil
-}
-
-// GET /flights/all
-func (c *Client) ListAllFlightsWithResult[R any](ctx context.Context, params *ListAllFlightsParams) (*R, error) {
 	u := c.baseURL.JoinPath("flights", "all")
 	if params != nil {
 		q := make(url.Values, 2)
@@ -200,19 +175,12 @@ func (c *Client) ListAllFlightsWithResult[R any](ctx context.Context, params *Li
 		// OK
 		switch mt, _, _ := strings.Cut(rsp.Header.Get("Content-Type"), ";"); mt {
 		case "application/json":
-			var out R
-
-			// a type of the caller's own declares only what it needs of the response, so it is decoded leniently
-			opts := jsonOptsLenient
-			if _, ok := any(&out).(*Flights); ok {
-				opts = jsonOpts
-			}
-
-			if err := json.UnmarshalRead(rsp.Body, &out, opts); err != nil {
+			var out Flights
+			if err := json.UnmarshalRead(rsp.Body, &out, jsonOpts); err != nil {
 				return nil, api.WrapDecodingError(rsp, err)
 			}
 
-			return &out, nil
+			return out, nil
 		default:
 			return nil, api.NewErrUnknownContentType(rsp)
 		}
@@ -238,19 +206,6 @@ func (c *Client) ListAllFlightsWithResult[R any](ctx context.Context, params *Li
 //
 //	GET /flights/aircraft
 func (c *Client) ListFlightsByAircraft(ctx context.Context, params *ListFlightsByAircraftParams) (Flights, error) {
-	out, err := c.ListFlightsByAircraftWithResult[Flights](ctx, params)
-	if err != nil {
-		return nil, err
-	}
-
-	return *out, nil
-}
-
-// Flights by Aircraft
-// You can define a custom result to unmarshal the response into.
-//
-//	GET /flights/aircraft
-func (c *Client) ListFlightsByAircraftWithResult[R any](ctx context.Context, params *ListFlightsByAircraftParams) (*R, error) {
 	u := c.baseURL.JoinPath("flights", "aircraft")
 	if params != nil {
 		q := make(url.Values, 3)
@@ -293,19 +248,12 @@ func (c *Client) ListFlightsByAircraftWithResult[R any](ctx context.Context, par
 		// OK
 		switch mt, _, _ := strings.Cut(rsp.Header.Get("Content-Type"), ";"); mt {
 		case "application/json":
-			var out R
-
-			// a type of the caller's own declares only what it needs of the response, so it is decoded leniently
-			opts := jsonOptsLenient
-			if _, ok := any(&out).(*Flights); ok {
-				opts = jsonOpts
-			}
-
-			if err := json.UnmarshalRead(rsp.Body, &out, opts); err != nil {
+			var out Flights
+			if err := json.UnmarshalRead(rsp.Body, &out, jsonOpts); err != nil {
 				return nil, api.WrapDecodingError(rsp, err)
 			}
 
-			return &out, nil
+			return out, nil
 		default:
 			return nil, api.NewErrUnknownContentType(rsp)
 		}
