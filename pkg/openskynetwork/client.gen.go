@@ -100,6 +100,7 @@ func (c *Client) ListAllStateVectors(ctx context.Context, params *ListAllStateVe
 
 	req := (&http.Request{
 		Header: http.Header{
+			"Accept":     []string{"application/json"},
 			"User-Agent": []string{c.userAgent},
 		},
 		Host:       u.Host,
@@ -154,6 +155,7 @@ func (c *Client) ListAllFlights(ctx context.Context, params *ListAllFlightsParam
 
 	req := (&http.Request{
 		Header: http.Header{
+			"Accept":     []string{"application/json, text/plain"},
 			"User-Agent": []string{c.userAgent},
 		},
 		Host:       u.Host,
@@ -227,6 +229,7 @@ func (c *Client) ListFlightsByAircraft(ctx context.Context, params *ListFlightsB
 
 	req := (&http.Request{
 		Header: http.Header{
+			"Accept":     []string{"application/json"},
 			"User-Agent": []string{c.userAgent},
 		},
 		Host:       u.Host,
